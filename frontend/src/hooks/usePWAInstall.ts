@@ -1,4 +1,4 @@
-
+/*
 import { useEffect, useState } from 'react';
 import { trackInstall } from '@/lib/installTracker';
 
@@ -35,11 +35,11 @@ export function usePWAInstall() {
   };
 
   return { isInstallable, install };
-}
+}*/
 
 //OLD CODE IF THIS DOESNT WORK
 
-/*
+
 import { useEffect, useState } from 'react';
 
 export function usePWAInstall() {
@@ -68,5 +68,5 @@ export function usePWAInstall() {
 
   return { isInstallable, install };
 }
-*/
+
 
