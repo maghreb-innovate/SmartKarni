@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "robots.txt"],
+      includeAssets: ["favicon.ico", "robots.txt", "logo.webp"],
       manifest: {
         name: "Smart Karni",
         short_name: "SmartKarni",

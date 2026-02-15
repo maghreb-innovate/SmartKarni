@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, CreditCard, Mail, Lock, User } from 'lucide-react';
+import { Loader2, Mail, Lock, User } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Register: React.FC = () => {
@@ -68,9 +68,7 @@ const Register: React.FC = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-background moroccan-pattern p-4" dir="rtl">
       {/* Logo/Brand */}
       <div className="text-center mb-8 animate-fade-in">
-        <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-emerald">
-          <CreditCard className="w-10 h-10 text-primary-foreground" />
-        </div>
+        <img src="/logo.webp" alt="Smart Karni" className="w-20 h-20 mx-auto mb-4 rounded-2xl shadow-emerald" />
         <h1 className="text-3xl font-bold text-foreground">سمارت كارني</h1>
         <p className="text-muted-foreground mt-2">إدارة ديون الزبائن بكل سهولة</p>
       </div>

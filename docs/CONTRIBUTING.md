@@ -4,8 +4,8 @@
 
 ```bash
 # Clone
-git clone https://github.com/RedaEkengren/Karni-Front.git
-cd Karni-Front
+git clone https://github.com/RedaEkengren/SmartKarni.git
+cd SmartKarni
 
 # Install
 cd frontend
