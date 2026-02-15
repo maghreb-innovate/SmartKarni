@@ -81,13 +81,11 @@ const Header = () => {
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center overflow-hidden">
-              <img
-                src="/icon-512.png"
-                alt="Smart Karni Logo"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <img
+              src="/logo.webp"
+              alt="Smart Karni Logo"
+              className="w-10 h-10 rounded-xl"
+            />
             <span className="font-bold text-lg md:text-xl text-primary">
               {t('سمارت كارني', 'Smart Karni')}
             </span>

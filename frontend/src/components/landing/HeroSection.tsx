@@ -33,13 +33,11 @@ const HeroSection = () => {
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center">
           {/* App Icon */}
-          <div className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 bg-primary rounded-3xl mb-6 md:mb-8 shadow-lg animate-float overflow-hidden">
-            <img
-              src="/icon-512.png"
-              alt="Smart Karni Logo"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          <img
+            src="/logo.webp"
+            alt="Smart Karni Logo"
+            className="w-20 h-20 md:w-24 md:h-24 rounded-3xl mb-6 md:mb-8 shadow-lg animate-float"
+          />
 
           {/* Title */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 animate-slide-up">

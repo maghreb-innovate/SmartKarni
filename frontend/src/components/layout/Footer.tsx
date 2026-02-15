@@ -18,13 +18,11 @@ const Footer = () => {
         {/* Logo and Tagline */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center overflow-hidden">
-              <img
-                src="/icon-512.png"
-                alt="Smart Karni Logo"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <img
+              src="/logo.webp"
+              alt="Smart Karni Logo"
+              className="w-12 h-12 rounded-xl"
+            />
             <span className="font-bold text-2xl">
               {t('سمارت كارني', 'Smart Karni')}
             </span>
