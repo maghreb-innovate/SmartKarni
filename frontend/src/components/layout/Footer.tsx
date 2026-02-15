@@ -21,7 +21,7 @@ const Footer = () => {
             <img
               src="/logo.webp"
               alt="Smart Karni Logo"
-              className="w-12 h-12 rounded-xl"
+              className="w-12 h-12 rounded-xl bg-white p-1"
             />
             <span className="font-bold text-2xl">
               {t('سمارت كارني', 'Smart Karni')}

@@ -36,7 +36,7 @@ const HeroSection = () => {
           <img
             src="/logo.webp"
             alt="Smart Karni Logo"
-            className="w-20 h-20 md:w-24 md:h-24 rounded-3xl mb-6 md:mb-8 shadow-lg animate-float"
+            className="w-20 h-20 md:w-24 md:h-24 rounded-3xl mb-6 md:mb-8 shadow-lg animate-float mx-auto"
           />
 
           {/* Title */}
