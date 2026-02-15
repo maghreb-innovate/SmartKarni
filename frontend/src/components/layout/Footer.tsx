@@ -119,7 +119,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="text-center text-primary-foreground/60 text-sm">
-          <p>© 2025 {t('سمارت كارني. جميع الحقوق محفوظة', 'Smart Karni. Tous droits réservés')}</p>
+          <p>© 2025–{new Date().getFullYear()} {t('سمارت كارني. جميع الحقوق محفوظة', 'Smart Karni. Tous droits réservés')}</p>
           <p className="mt-2 flex items-center justify-center gap-2">
             🇲🇦 {t('صنع في المغرب بكل حب', 'Fait au Maroc avec amour')} ❤️
           </p>

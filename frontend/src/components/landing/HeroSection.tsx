@@ -1,19 +1,10 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ArrowLeft, ArrowRight, Check, Shield, MessageCircle, Cloud, Fingerprint } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowLeft, ArrowRight, Shield, MessageCircle, Cloud, Fingerprint } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   const { t, isArabic } = useLanguage();
   const Arrow = isArabic ? ArrowLeft : ArrowRight;
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleWaitlist = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Connect to backend waitlist API
-    console.log('Waitlist signup:', email);
-    setSubmitted(true);
-  };
 
   const benefits = [
     { ar: 'ما عمرك تخسر فلوسك', fr: 'Jamais de données perdues', icon: Cloud },
@@ -44,12 +35,12 @@ const HeroSection = () => {
             {t('سمارت كارني', 'Smart Karni')}
           </h1>
 
-          {/* NEW Tagline - Focus on never losing data */}
+          {/* Tagline */}
           <p className="text-xl md:text-2xl text-primary font-semibold mb-6 animate-slide-up delay-100">
             {t('ما عمرك تخسر فلوسك - أبدا!', 'Ne perdez plus jamais vos données - Jamais!')}
           </p>
 
-          {/* Description - Emphasize reliability vs competitor */}
+          {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-slide-up delay-200">
             {t(
               'التطبيق المغربي الوحيد لتتبع الديون مع backup تلقائي، دعم 24/7 بالدارجة، و صدقة لمساعدة المحتاجين',
@@ -57,37 +48,22 @@ const HeroSection = () => {
             )}
           </p>
 
-          {/* Waitlist Form */}
-          <div className="animate-slide-up delay-300 mb-8">
-            {!submitted ? (
-              <form onSubmit={handleWaitlist} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={isArabic ? 'الإيميل ديالك...' : 'Votre email...'}
-                  className="flex-1 px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-                <button type="submit" className="btn-primary text-lg whitespace-nowrap">
-                  {t('سجل فالقائمة', 'Rejoindre la liste')}
-                  <Arrow className="w-5 h-5" />
-                </button>
-              </form>
-            ) : (
-              <div className="bg-success/10 text-success px-6 py-4 rounded-xl inline-flex items-center gap-2">
-                <Check className="w-6 h-6" />
-                <span className="font-semibold">
-                  {t('شكرا! غادي نخبروك ملي نلانسيو', 'Merci! On vous préviendra au lancement')}
-                </span>
-              </div>
-            )}
-            <p className="text-sm text-muted-foreground mt-3">
-              {t('🚀 قريبا جدا - كون من الأوائل!', '🚀 Bientôt disponible - Soyez parmi les premiers!')}
-            </p>
+          {/* CTA Buttons */}
+          <div className="animate-slide-up delay-300 mb-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/register" className="btn-primary text-lg">
+              {t('ابدأ مجانا', 'Commencer gratuitement')}
+              <Arrow className="w-5 h-5" />
+            </Link>
+            <Link to="/preview" className="btn-secondary text-lg">
+              {t('شوف المعاينة', 'Voir l\'aperçu')}
+            </Link>
           </div>
 
-          {/* Benefits - NEW with icons */}
+          <p className="text-sm text-muted-foreground mb-8">
+            {t('✅ مجاني - بلا بطاقة بنكية', '✅ Gratuit - Sans carte bancaire')}
+          </p>
+
+          {/* Benefits */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-slide-up delay-400">
             {benefits.map((benefit, index) => (
               <div

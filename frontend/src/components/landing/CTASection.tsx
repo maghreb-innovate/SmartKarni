@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowLeft, ArrowRight, Check, Bell } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CTASection = () => {
   const { t, isArabic } = useLanguage();
@@ -23,47 +24,34 @@ const CTASection = () => {
         </div>
 
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          {t('كن من الأوائل!', 'Soyez parmi les premiers!')}
+          {t('جرب سمارت كارني دابا!', 'Essayez Smart Karni maintenant!')}
         </h2>
         <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
           {t(
-            'سجل دابا باش نخبروك ملي نلانسيو سمارت كارني. الأوائل غادي يستافدو من Premium مجانا لمدة شهر!',
-            'Inscrivez-vous maintenant pour être notifié au lancement. Les premiers inscrits auront Premium gratuit pendant un mois!'
+            'سجل مجانا و بدأ تسجل ديون الزبائن ديالك. بلا بطاقة بنكية!',
+            'Inscrivez-vous gratuitement et commencez à gérer les dettes de vos clients. Sans carte bancaire!'
           )}
         </p>
 
-        {/* Waitlist Form */}
-        {!submitted ? (
-          <form onSubmit={handleWaitlist} className="max-w-md mx-auto mb-8">
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder={isArabic ? 'رقم الهاتف (06...)' : 'Numéro de téléphone (06...)'}
-                className="flex-1 px-4 py-3 rounded-xl bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent"
-                required
-              />
-              <button type="submit" className="btn-gold text-lg whitespace-nowrap">
-                {t('خبرني', 'Me notifier')}
-                <Arrow className="w-5 h-5" />
-              </button>
-            </div>
-            <p className="text-sm text-primary-foreground/60 mt-3">
-              {t('غادي نرسلولك WhatsApp ملي نلانسيو', 'On vous enverra un WhatsApp au lancement')}
-            </p>
-          </form>
-        ) : (
-          <div className="bg-accent/20 text-primary-foreground px-6 py-4 rounded-xl inline-flex items-center gap-2 mb-8">
-            <Check className="w-6 h-6" />
-            <span className="font-semibold">
-              {t('تم! غادي نخبروك قريبا إن شاء الله', 'C\'est fait! On vous contactera bientôt inchallah')}
-            </span>
-          </div>
-        )}
+        {/* Primary CTA */}
+        <div className="mb-10">
+          <Link to="/register" className="btn-gold text-lg inline-flex">
+            {t('ابدأ مجانا', 'Commencer gratuitement')}
+            <Arrow className="w-5 h-5" />
+          </Link>
+        </div>
 
-        {/* Coming soon badges */}
-        <div className="flex flex-wrap justify-center gap-4">
+        {/* App badges */}
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
+          <Link to="/login" className="bg-primary-foreground/20 rounded-xl px-6 py-3 flex items-center gap-3 hover:bg-primary-foreground/30 transition-colors">
+            <span className="text-2xl">🌐</span>
+            <div className="text-start">
+              <div className="text-xs text-primary-foreground/60">
+                {t('متاح الآن', 'Disponible')}
+              </div>
+              <div className="font-semibold">Web App ✓</div>
+            </div>
+          </Link>
           <div className="bg-primary-foreground/10 rounded-xl px-6 py-3 flex items-center gap-3">
             <span className="text-2xl">▶️</span>
             <div className="text-start">
@@ -82,15 +70,37 @@ const CTASection = () => {
               <div className="font-semibold">App Store</div>
             </div>
           </div>
-          <a href="/login" className="bg-primary-foreground/20 rounded-xl px-6 py-3 flex items-center gap-3 hover:bg-primary-foreground/30 transition-colors">
-            <span className="text-2xl">🌐</span>
-            <div className="text-start">
-              <div className="text-xs text-primary-foreground/60">
-                {t('متاح الآن', 'Disponible')}
+        </div>
+
+        {/* Notify for mobile apps */}
+        <div className="border-t border-primary-foreground/20 pt-8">
+          <p className="text-primary-foreground/60 text-sm mb-4">
+            {t('بغيتي نخبروك ملي تطبيق الموبايل يكون جاهز؟', 'Voulez-vous être notifié quand l\'app mobile sera prête?')}
+          </p>
+          {!submitted ? (
+            <form onSubmit={handleWaitlist} className="max-w-sm mx-auto">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder={isArabic ? 'رقم الهاتف (06...)' : 'Numéro de téléphone (06...)'}
+                  className="flex-1 px-4 py-3 rounded-xl bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent"
+                  required
+                />
+                <button type="submit" className="btn-gold whitespace-nowrap">
+                  {t('خبرني', 'Me notifier')}
+                </button>
               </div>
-              <div className="font-semibold">Web App ✓</div>
+            </form>
+          ) : (
+            <div className="bg-accent/20 text-primary-foreground px-6 py-4 rounded-xl inline-flex items-center gap-2">
+              <Check className="w-6 h-6" />
+              <span className="font-semibold">
+                {t('تم! غادي نخبروك قريبا إن شاء الله', 'C\'est fait! On vous contactera bientôt inchallah')}
+              </span>
             </div>
-          </a>
+          )}
         </div>
       </div>
     </section>

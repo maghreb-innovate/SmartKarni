@@ -78,7 +78,7 @@ const Pricing = () => {
                 ))}
               </ul>
 
-              <a href="/#download" className="btn-secondary w-full text-center">
+              <a href="/register" className="btn-secondary w-full text-center">
                 {t('ابدأ مجانا', 'Commencer gratuitement')}
               </a>
             </div>
@@ -114,7 +114,7 @@ const Pricing = () => {
                 ))}
               </ul>
 
-              <a href="/#download" className="btn-gold w-full text-center">
+              <a href="/register" className="btn-gold w-full text-center">
                 {t('جرب Premium', 'Essayer Premium')}
               </a>
             </div>

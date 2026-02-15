@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/Layout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useState } from 'react';
-import { Send, MessageCircle, Mail } from 'lucide-react';
+import { Send, MessageCircle, Mail, Check } from 'lucide-react';
 
 const Contact = () => {
   const { t, isArabic } = useLanguage();
@@ -10,11 +10,14 @@ const Contact = () => {
     phone: '',
     message: '',
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission logic would go here
-    alert(isArabic ? 'شكرا! غادي نتواصلو معاك قريبا' : 'Merci! Nous vous contacterons bientôt');
+    const { name, phone, message } = formData;
+    const body = `${isArabic ? 'الإسم' : 'Nom'}: ${name.trim()}%0A${isArabic ? 'رقم' : 'Tél'}: ${phone}%0A%0A${message}`;
+    window.open(`mailto:salam@smartkarni.com?subject=${encodeURIComponent(isArabic ? 'رسالة من الموقع' : 'Message du site')}&body=${body}`);
+    setSubmitted(true);
   };
 
   return (
@@ -43,55 +46,70 @@ const Contact = () => {
               <h2 className="text-2xl font-bold mb-6">
                 {t('راسلنا', 'Envoyez un message')}
               </h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    {t('الإسم', 'Nom')}
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    placeholder={isArabic ? 'الإسم ديالك' : 'Votre nom'}
-                    required
-                  />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    {t('رقم الواتساب', 'Numéro WhatsApp')}
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    placeholder="+212 6XX XXX XXX"
-                    required
-                  />
-                </div>
+              {!submitted ? (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      {t('الإسم', 'Nom')}
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      placeholder={isArabic ? 'الإسم ديالك' : 'Votre nom'}
+                      required
+                      maxLength={100}
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    {t('الرسالة', 'Message')}
-                  </label>
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    rows={5}
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
-                    placeholder={isArabic ? 'أش بغيتي تقولينا؟' : 'Que voulez-vous nous dire?'}
-                    required
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      {t('رقم الواتساب', 'Numéro WhatsApp')}
+                    </label>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      placeholder="+212 6XX XXX XXX"
+                      required
+                    />
+                  </div>
 
-                <button type="submit" className="btn-primary w-full">
-                  <Send className="w-5 h-5" />
-                  {t('بعت الرسالة', 'Envoyer')}
-                </button>
-              </form>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      {t('الرسالة', 'Message')}
+                    </label>
+                    <textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      rows={5}
+                      className="w-full px-4 py-3 rounded-xl border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                      placeholder={isArabic ? 'أش بغيتي تقولينا؟' : 'Que voulez-vous nous dire?'}
+                      required
+                    />
+                  </div>
+
+                  <button type="submit" className="btn-primary w-full">
+                    <Send className="w-5 h-5" />
+                    {t('بعت الرسالة', 'Envoyer')}
+                  </button>
+                </form>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Check className="w-8 h-8 text-success" />
+                  </div>
+                  <p className="text-lg font-semibold mb-2">
+                    {t('شكرا!', 'Merci!')}
+                  </p>
+                  <p className="text-muted-foreground">
+                    {t('غادي نتواصلو معاك قريبا إن شاء الله', 'Nous vous contacterons bientôt inchallah')}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Contact Info */}
@@ -100,21 +118,8 @@ const Contact = () => {
                 <h2 className="text-2xl font-bold mb-6">
                   {t('أو تواصل معانا مباشرة', 'Ou contactez-nous directement')}
                 </h2>
-                
-                <div className="space-y-6">
-                  <a
-                    href="https://wa.me/212XXXXXXXXX"
-                    className="flex items-center gap-4 p-6 bg-card rounded-xl border border-border hover:border-primary transition-colors group"
-                  >
-                    <div className="w-14 h-14 bg-success/10 rounded-xl flex items-center justify-center group-hover:bg-success/20 transition-colors">
-                      <MessageCircle className="w-7 h-7 text-success" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-lg">WhatsApp</div>
-                      <div className="text-muted-foreground">+212 XXX XXX XXX</div>
-                    </div>
-                  </a>
 
+                <div className="space-y-6">
                   <a
                     href="mailto:salam@smartkarni.com"
                     className="flex items-center gap-4 p-6 bg-card rounded-xl border border-border hover:border-primary transition-colors group"

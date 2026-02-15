@@ -20,11 +20,9 @@ test.describe('Landing Page', () => {
       await expect(page.locator('p.text-primary.font-semibold').first()).toContainText('ما عمرك تخسر فلوسك');
     });
 
-    test('shows the email waitlist form', async ({ page }) => {
-      const emailInput = page.locator('input[type="email"]').first();
-      await expect(emailInput).toBeVisible();
-      const submitBtn = page.locator('button[type="submit"]').first();
-      await expect(submitBtn).toBeVisible();
+    test('shows CTA buttons to register and preview', async ({ page }) => {
+      await expect(page.locator('a[href="/register"]').first()).toBeVisible();
+      await expect(page.locator('a[href="/preview"]')).toBeVisible();
     });
 
     test('shows 4 benefit cards', async ({ page }) => {
@@ -131,7 +129,7 @@ test.describe('Landing Page', () => {
   // ── CTASection ───────────────────────────────────────────
   test.describe('CTASection', () => {
     test('shows the heading', async ({ page }) => {
-      await expect(page.locator('text=كن من الأوائل!')).toBeVisible();
+      await expect(page.locator('text=جرب سمارت كارني دابا!')).toBeVisible();
     });
 
     test('shows the phone waitlist form', async ({ page }) => {

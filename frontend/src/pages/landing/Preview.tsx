@@ -235,7 +235,7 @@ const Preview = () => {
           <h2 className="text-3xl font-bold mb-4">
             {t('عجبك؟ نزّل التطبيق دابا!', 'Ça vous plaît? Téléchargez maintenant!')}
           </h2>
-          <a href="/#download" className="btn-gold text-lg inline-flex">
+          <a href="/register" className="btn-gold text-lg inline-flex">
             {t('نزّل التطبيق', 'Télécharger')}
             <Arrow className="w-5 h-5" />
           </a>

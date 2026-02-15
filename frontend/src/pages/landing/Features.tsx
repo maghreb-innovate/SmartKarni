@@ -127,7 +127,7 @@ const Features = () => {
           <h2 className="text-3xl font-bold mb-4">
             {t('جرب سمارت كارني دابا', 'Essayez Smart Karni maintenant')}
           </h2>
-          <a href="/#download" className="btn-gold">
+          <a href="/register" className="btn-gold">
             {t('نزّل التطبيق مجانا', 'Télécharger gratuitement')}
           </a>
         </div>

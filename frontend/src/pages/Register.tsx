@@ -9,7 +9,7 @@ import { Loader2, Mail, Lock, User } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Register: React.FC = () => {
-  const { user, loading, signUp } = useAuth();
+  const { user, loading, signUp, signOut } = useAuth();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -25,8 +25,15 @@ const Register: React.FC = () => {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
+    const trimmedName = name.trim();
+
+    if (!trimmedName || !email || !password) {
       toast.error('الرجاء ملء جميع الحقول المطلوبة');
+      return;
+    }
+
+    if (trimmedName.length > 100) {
+      toast.error('الاسم طويل بزاف');
       return;
     }
 
@@ -41,7 +48,7 @@ const Register: React.FC = () => {
     }
 
     setIsLoading(true);
-    const { error } = await signUp(email, password, name);
+    const { error } = await signUp(email, password, trimmedName);
     setIsLoading(false);
 
     if (error) {
@@ -93,6 +100,7 @@ const Register: React.FC = () => {
                   onChange={(e) => setName(e.target.value)}
                   className="pr-10"
                   required
+                  maxLength={100}
                 />
               </div>
             </div>
