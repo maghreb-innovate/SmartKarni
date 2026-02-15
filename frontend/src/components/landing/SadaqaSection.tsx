@@ -135,12 +135,12 @@ const SadaqaSection = () => {
           <blockquote className="bg-secondary/50 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto">
             <p className="text-lg md:text-xl font-medium mb-4">
               {t(
-                '"من نفّس عن مؤمن كربة من كرب الدنيا، نفّس الله عنه كربة من كرب يوم القيامة"',
-                '"Celui qui soulage un croyant d\'une difficulté, Allah le soulagera d\'une difficulté au Jour du Jugement"'
+                '"من نفّس عن مؤمن كربة من كرب الدنيا، نفّس الله عنه كربة من كرب يوم القيامة، ومن يسّر على معسر، يسّر الله عليه في الدنيا والآخرة، والله في عون العبد ما كان العبد في عون أخيه"',
+                '"Celui qui soulage un croyant d\'une difficulté, Allah le soulagera d\'une difficulté au Jour du Jugement. Celui qui facilite à quelqu\'un en difficulté, Allah lui facilitera dans ce monde et dans l\'au-delà. Et Allah aide Son serviteur tant que celui-ci aide son frère."'
               )}
             </p>
             <cite className="text-muted-foreground text-sm">
-              {t('— حديث شريف', '— Hadith')}
+              {t('— رواه مسلم', '— Rapporté par Muslim')}
             </cite>
           </blockquote>
         </div>
