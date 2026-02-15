@@ -82,15 +82,15 @@ const CTASection = () => {
               <div className="font-semibold">App Store</div>
             </div>
           </div>
-          <div className="bg-primary-foreground/10 rounded-xl px-6 py-3 flex items-center gap-3">
+          <a href="/login" className="bg-primary-foreground/20 rounded-xl px-6 py-3 flex items-center gap-3 hover:bg-primary-foreground/30 transition-colors">
             <span className="text-2xl">🌐</span>
             <div className="text-start">
               <div className="text-xs text-primary-foreground/60">
-                {t('قريبا على', 'Bientôt sur')}
+                {t('متاح الآن', 'Disponible')}
               </div>
-              <div className="font-semibold">Web App</div>
+              <div className="font-semibold">Web App ✓</div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
