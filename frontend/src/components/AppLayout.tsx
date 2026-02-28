@@ -2,7 +2,6 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { BottomNav } from './BottomNav';
-import { AdBanner } from './AdBanner';
 import { Loader2 } from 'lucide-react';
 
 export const AppLayout: React.FC = () => {
@@ -25,11 +24,9 @@ export const AppLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background pb-20">
-      <AdBanner position="top" />
       <main className="px-4">
         <Outlet />
       </main>
-      <AdBanner position="bottom" />
       <BottomNav />
     </div>
   );

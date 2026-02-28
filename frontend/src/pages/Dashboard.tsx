@@ -12,13 +12,10 @@ import {
   TrendingUp,
   Wallet,
   ChevronLeft,
-  Crown,
-  AlertCircle
 } from 'lucide-react';
-import { formatCurrency, FREE_PLAN_LIMITS } from '@/lib/constants';
+import { formatCurrency } from '@/lib/constants';
 import { ClientCard } from '@/components/ClientCard';
 import { AddClientModal } from '@/components/AddClientModal';
-import { UpgradeModal } from '@/components/UpgradeModal';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const Dashboard: React.FC = () => {
@@ -27,22 +24,11 @@ const Dashboard: React.FC = () => {
   const { totalDebt, isLoading: debtLoading } = useTotalDebt();
 
   const [showAddClient, setShowAddClient] = useState(false);
-  const [showUpgrade, setShowUpgrade] = useState(false);
 
-  const isPremium = profile?.is_premium ?? false;
   const recentClients = clients.slice(0, 3);
-  const canAddClient = isPremium || clientCount < FREE_PLAN_LIMITS.MAX_CLIENTS;
 
   const handleAddClient = async (data: { name: string; phone?: string; notes?: string }) => {
     await addClient.mutateAsync(data);
-  };
-
-  const handleQuickAdd = () => {
-    if (!canAddClient) {
-      setShowUpgrade(true);
-      return;
-    }
-    setShowAddClient(true);
   };
 
   return (
@@ -57,17 +43,6 @@ const Dashboard: React.FC = () => {
             إليك ملخص ديون متجرك
           </p>
         </div>
-        {!isPremium && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowUpgrade(true)}
-            className="text-accent border-accent/30 hover:bg-accent/10"
-          >
-            <Crown className="w-4 h-4 ml-1" />
-            ترقية
-          </Button>
-        )}
       </div>
 
       {/* Stats Cards */}
@@ -111,18 +86,13 @@ const Dashboard: React.FC = () => {
                 )}
               </div>
             </div>
-            {!isPremium && (
-              <p className="text-xs text-muted-foreground mt-2">
-                {clientCount}/{FREE_PLAN_LIMITS.MAX_CLIENTS} في الخطة المجانية
-              </p>
-            )}
           </CardContent>
         </Card>
 
         {/* Quick Add Button */}
         <Card
           className="card-hover cursor-pointer border-dashed border-2 border-primary/30 bg-primary/5"
-          onClick={handleQuickAdd}
+          onClick={() => setShowAddClient(true)}
         >
           <CardContent className="p-4 flex flex-col items-center justify-center h-full">
             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-2">
@@ -132,26 +102,6 @@ const Dashboard: React.FC = () => {
           </CardContent>
         </Card>
       </div>
-
-      {/* Free Plan Warning */}
-      {!isPremium && clientCount >= FREE_PLAN_LIMITS.MAX_CLIENTS - 2 && (
-        <Card className="bg-warning/10 border-warning/30">
-          <CardContent className="p-4 flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-warning flex-shrink-0" />
-            <div className="flex-1">
-              <p className="text-sm font-medium text-foreground">
-                أنت قريب من الحد الأقصى لزبائن
-              </p>
-              <p className="text-xs text-muted-foreground">
-                يتبقى لك {FREE_PLAN_LIMITS.MAX_CLIENTS - clientCount} زبون فقط في الخطة المجانية
-              </p>
-            </div>
-            <Button size="sm" className="btn-gold" onClick={() => setShowUpgrade(true)}>
-              ترقية
-            </Button>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Recent Clients */}
       <div>
@@ -203,7 +153,7 @@ const Dashboard: React.FC = () => {
             <CardContent className="p-8 text-center">
               <Users className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground">لا يوجد زبائن بعد</p>
-              <Button className="mt-4 btn-gradient" onClick={handleQuickAdd}>
+              <Button className="mt-4 btn-gradient" onClick={() => setShowAddClient(true)}>
                 <Plus className="w-4 h-4 ml-2" />
                 إضافة أول زبون
               </Button>
@@ -217,11 +167,6 @@ const Dashboard: React.FC = () => {
         open={showAddClient}
         onOpenChange={setShowAddClient}
         onSubmit={handleAddClient}
-      />
-      <UpgradeModal
-        open={showUpgrade}
-        onOpenChange={setShowUpgrade}
-        reason="clients"
       />
     </div>
   );

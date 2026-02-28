@@ -36,7 +36,7 @@ const Header = () => {
   const navLinks = [
     { path: '/', label: { ar: 'الرئيسية', fr: 'Accueil' } },
     { path: '/features', label: { ar: 'المميزات', fr: 'Fonctionnalités' } },
-    { path: '/pricing', label: { ar: 'الأثمنة', fr: 'Tarifs' } },
+
     { path: '/preview', label: { ar: 'معاينة', fr: 'Aperçu' } },
     { path: '/contact', label: { ar: 'تواصل', fr: 'Contact' } },
   ];
@@ -116,7 +116,7 @@ const Header = () => {
               onClick={toggleLanguage}
               className="px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground text-sm font-medium hover:bg-muted"
             >
-              {isArabic ? 'FR' : 'ع'}
+              {isArabic ? 'FR' : 'AR'}
             </button>
 
             {/* PWA Install – Desktop */}
@@ -172,15 +172,24 @@ const Header = () => {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 rounded-lg hover:bg-muted"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div
+            className="fixed inset-0 top-16 z-40 bg-black/50 md:hidden"
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
+
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border animate-fade-in">
+          <nav className="md:hidden py-4 border-t border-border animate-fade-in relative z-50 bg-background">
             <div className="flex flex-col gap-1">
 
               {navLinks.map(link => (

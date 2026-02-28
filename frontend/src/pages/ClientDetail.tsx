@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContext';
+
 import { useTransactions } from '@/hooks/useTransactions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -19,11 +19,10 @@ import {
   Banknote,
   Loader2
 } from 'lucide-react';
-import { formatCurrency, FREE_PLAN_LIMITS } from '@/lib/constants';
+import { formatCurrency } from '@/lib/constants';
 import { TransactionCard } from '@/components/TransactionCard';
 import { AddTransactionModal } from '@/components/AddTransactionModal';
 import { PartialPaymentModal } from '@/components/PartialPaymentModal';
-import { UpgradeModal } from '@/components/UpgradeModal';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   AlertDialog,
@@ -42,7 +41,6 @@ import { toast } from 'sonner';
 const ClientDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { profile } = useAuth();
   const queryClient = useQueryClient();
   const { deleteClient } = useClients();
   const {
@@ -57,7 +55,6 @@ const ClientDetail: React.FC = () => {
 
   const [showAddTransaction, setShowAddTransaction] = useState(false);
   const [showPartialPayment, setShowPartialPayment] = useState(false);
-  const [showUpgrade, setShowUpgrade] = useState(false);
   const [activeTab, setActiveTab] = useState<'active' | 'history'>('active');
 
   // Fetch client details
@@ -77,18 +74,9 @@ const ClientDetail: React.FC = () => {
     enabled: !!id,
   });
 
-  const isPremium = profile?.is_premium ?? false;
-
   const totalDebt = useMemo(() => {
     return unpaidTransactions.reduce((sum, t) => sum + t.total_amount, 0);
   }, [unpaidTransactions]);
-
-  const currentItemCount = useMemo(() => {
-    return [...unpaidTransactions, ...paidTransactions].reduce(
-      (sum, t) => sum + (t.items?.length || 0),
-      0
-    );
-  }, [unpaidTransactions, paidTransactions]);
 
   const handleAddTransaction = async (data: {
     clientId: string;
@@ -333,9 +321,7 @@ const ClientDetail: React.FC = () => {
         onOpenChange={setShowAddTransaction}
         clientId={id!}
         clientName={client.name}
-        currentItemCount={currentItemCount}
         onSubmit={handleAddTransaction}
-        onUpgradeNeeded={() => setShowUpgrade(true)}
       />
       <PartialPaymentModal
         isOpen={showPartialPayment}
@@ -348,11 +334,6 @@ const ClientDetail: React.FC = () => {
         }))}
         onPayment={handlePartialPayment}
         clientName={client.name}
-      />
-      <UpgradeModal
-        open={showUpgrade}
-        onOpenChange={setShowUpgrade}
-        reason="items"
       />
     </div>
   );

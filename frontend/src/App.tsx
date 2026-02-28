@@ -11,7 +11,7 @@ import InstallPrompt from "@/components/InstallPrompt";
 // Landing pages (Smart Karni)
 import LandingPage from "./pages/landing/LandingPage";
 import Features from "./pages/landing/Features";
-import Pricing from "./pages/landing/Pricing";
+
 import Contact from "./pages/landing/Contact";
 import Privacy from "./pages/landing/Privacy";
 import Preview from "./pages/landing/Preview";
@@ -44,7 +44,7 @@ const App = () => (
               {/* Landing pages */}
               <Route path="/" element={<LandingPage />} />
               <Route path="/features" element={<Features />} />
-              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/pricing" element={<Navigate to="/" replace />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/preview" element={<Preview />} />

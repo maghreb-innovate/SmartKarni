@@ -42,19 +42,17 @@ const Features = () => {
       icon: MessageSquare,
       title: { ar: 'تذكير WhatsApp', fr: 'Rappels WhatsApp' },
       description: {
-        ar: 'بعت رسالة للزبون باش تفكرو بالدين (Premium)',
-        fr: 'Envoyez un rappel au client via WhatsApp (Premium)'
+        ar: 'بعت رسالة للزبون باش تفكرو بالدين',
+        fr: 'Envoyez un rappel au client via WhatsApp'
       },
-      premium: true,
     },
     {
       icon: FileText,
       title: { ar: 'Export PDF', fr: 'Export PDF' },
       description: {
-        ar: 'طبع لائحة الديون إلا حتاجيتيها (Premium)',
-        fr: 'Imprimez la liste des dettes si vous en avez besoin (Premium)'
+        ar: 'طبع لائحة الديون إلا حتاجيتيها',
+        fr: 'Imprimez la liste des dettes si vous en avez besoin'
       },
-      premium: true,
     },
     {
       icon: Cloud,
@@ -68,10 +66,9 @@ const Features = () => {
       icon: Fingerprint,
       title: { ar: 'قفل بالبصمة', fr: 'Verrouillage biométrique' },
       description: {
-        ar: 'حمي المعلومات ديالك بالبصمة أو الكود (Premium)',
-        fr: 'Protégez vos données avec empreinte ou code (Premium)'
+        ar: 'حمي المعلومات ديالك بالبصمة أو الكود',
+        fr: 'Protégez vos données avec empreinte ou code'
       },
-      premium: true,
     },
   ];
 
@@ -101,11 +98,6 @@ const Features = () => {
                 key={index}
                 className="feature-card relative"
               >
-                {feature.premium && (
-                  <span className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-bold px-2 py-1 rounded-full">
-                    Premium
-                  </span>
-                )}
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                   <feature.icon className="w-6 h-6 text-primary" />
                 </div>

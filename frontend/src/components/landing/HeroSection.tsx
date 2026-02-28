@@ -9,7 +9,7 @@ const HeroSection = () => {
   const benefits = [
     { ar: 'ما عمرك تخسر فلوسك', fr: 'Jamais de données perdues', icon: Cloud },
     { ar: 'دعم 24/7 بالدارجة', fr: 'Support 24/7 en darija', icon: MessageCircle },
-    { ar: 'صدقة - ساعد الآخرين', fr: 'Sadaqa - Aidez les autres', icon: '🤲' },
+    { ar: '100% مجاني', fr: '100% Gratuit', icon: '✅' },
     { ar: 'قفل بالبصمة', fr: 'Verrouillage biométrique', icon: Fingerprint },
   ];
 
@@ -43,8 +43,8 @@ const HeroSection = () => {
           {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-slide-up delay-200">
             {t(
-              'التطبيق المغربي الوحيد لتتبع الديون مع backup تلقائي، دعم 24/7 بالدارجة، و صدقة لمساعدة المحتاجين',
-              'La seule app marocaine de suivi des dettes avec sauvegarde automatique, support 24/7 en darija, et Sadaqa pour aider les nécessiteux'
+              'التطبيق المغربي الوحيد لتتبع الديون مع backup تلقائي، دعم 24/7 بالدارجة، و 100% مجاني',
+              'La seule app marocaine de suivi des dettes avec sauvegarde automatique, support 24/7 en darija, et 100% gratuit'
             )}
           </p>
 

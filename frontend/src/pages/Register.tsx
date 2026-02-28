@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, Mail, Lock, User } from 'lucide-react';
+import { Loader2, Mail, Lock, User, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Register: React.FC = () => {
@@ -73,6 +73,12 @@ const Register: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background moroccan-pattern p-4" dir="rtl">
+      {/* Back to Home */}
+      <Link to="/" className="self-start mb-4 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <ArrowRight className="w-4 h-4" />
+        الرجوع للرئيسية
+      </Link>
+
       {/* Logo/Brand */}
       <div className="text-center mb-8 animate-fade-in">
         <img src="/logo.webp" alt="Smart Karni" className="w-20 h-20 mx-auto mb-4 rounded-2xl shadow-emerald" />

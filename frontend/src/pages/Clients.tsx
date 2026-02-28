@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
 import { useClients } from '@/hooks/useClients';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -7,20 +6,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Search, Plus, Users, UserX } from 'lucide-react';
 import { ClientCard } from '@/components/ClientCard';
 import { AddClientModal } from '@/components/AddClientModal';
-import { UpgradeModal } from '@/components/UpgradeModal';
 import { Skeleton } from '@/components/ui/skeleton';
-import { FREE_PLAN_LIMITS } from '@/lib/constants';
 
 const Clients: React.FC = () => {
-  const { profile } = useAuth();
   const { clients, isLoading, addClient, clientCount } = useClients();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddClient, setShowAddClient] = useState(false);
-  const [showUpgrade, setShowUpgrade] = useState(false);
-
-  const isPremium = profile?.is_premium ?? false;
-  const canAddClient = isPremium || clientCount < FREE_PLAN_LIMITS.MAX_CLIENTS;
 
   const filteredClients = useMemo(() => {
     if (!searchQuery.trim()) return clients;
@@ -36,14 +28,6 @@ const Clients: React.FC = () => {
     await addClient.mutateAsync(data);
   };
 
-  const handleAddClick = () => {
-    if (!canAddClient) {
-      setShowUpgrade(true);
-      return;
-    }
-    setShowAddClient(true);
-  };
-
   return (
     <div className="py-4 space-y-4" dir="rtl">
       {/* Header */}
@@ -55,10 +39,9 @@ const Clients: React.FC = () => {
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
             {clientCount} زبون
-            {!isPremium && ` / ${FREE_PLAN_LIMITS.MAX_CLIENTS}`}
           </p>
         </div>
-        <Button onClick={handleAddClick} className="btn-gradient">
+        <Button onClick={() => setShowAddClient(true)} className="btn-gradient">
           <Plus className="w-4 h-4 ml-1" />
           إضافة
         </Button>
@@ -125,7 +108,7 @@ const Clients: React.FC = () => {
           <CardContent className="p-8 text-center">
             <Users className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
             <p className="text-muted-foreground">لا يوجد زبائن بعد</p>
-            <Button className="mt-4 btn-gradient" onClick={handleAddClick}>
+            <Button className="mt-4 btn-gradient" onClick={() => setShowAddClient(true)}>
               <Plus className="w-4 h-4 ml-2" />
               إضافة أول زبون
             </Button>
@@ -138,11 +121,6 @@ const Clients: React.FC = () => {
         open={showAddClient}
         onOpenChange={setShowAddClient}
         onSubmit={handleAddClient}
-      />
-      <UpgradeModal
-        open={showUpgrade}
-        onOpenChange={setShowUpgrade}
-        reason="clients"
       />
     </div>
   );

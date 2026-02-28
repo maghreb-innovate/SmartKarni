@@ -1,8 +1,3 @@
-export const FREE_PLAN_LIMITS = {
-  MAX_CLIENTS: 20,
-  MAX_ITEMS_PER_CLIENT: 100,
-} as const;
-
 export const CURRENCY = {
   symbol: 'د.م.',
   code: 'MAD',

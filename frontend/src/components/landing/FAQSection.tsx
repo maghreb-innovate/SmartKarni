@@ -42,12 +42,12 @@ const FAQSection = () => {
     },
     {
       question: {
-        ar: 'شحال من زبون نقدر نزيد فالنسخة المجانية؟',
-        fr: 'Combien de clients puis-je ajouter en version gratuite?'
+        ar: 'شحال من زبون نقدر نزيد؟',
+        fr: 'Combien de clients puis-je ajouter?'
       },
       answer: {
-        ar: '20 زبون. كافي للبداية!',
-        fr: '20 clients. Suffisant pour commencer!'
+        ar: 'عدد غير محدود من الزبائن! التطبيق مجاني 100% بلا حدود.',
+        fr: 'Un nombre illimité de clients! L\'application est 100% gratuite sans limites.'
       },
     },
   ];

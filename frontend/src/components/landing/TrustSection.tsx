@@ -1,5 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Users, Shield, Rocket } from 'lucide-react';
+import { Users, Shield, Gift } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const TrustSection = () => {
   const { t, isArabic } = useLanguage();
@@ -41,11 +42,11 @@ const TrustSection = () => {
       },
     },
     {
-      icon: Rocket,
-      title: { ar: 'صدقة فريدة', fr: 'Sadaqa unique' },
+      icon: Gift,
+      title: { ar: '100% مجاني', fr: '100% Gratuit' },
       description: {
-        ar: 'الميزة الوحيدة فالمغرب: ساعد المحتاجين بدفع ديونهم',
-        fr: 'La seule fonctionnalité au Maroc: aidez les nécessiteux'
+        ar: 'بلا اشتراك، بلا إعلانات، بلا حدود. مجاني للأبد.',
+        fr: 'Sans abonnement, sans publicités, sans limites. Gratuit pour toujours.'
       },
     },
   ];
@@ -96,26 +97,24 @@ const TrustSection = () => {
           ))}
         </div>
 
-        {/* Waitlist Counter */}
+        {/* CTA */}
         <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="text-3xl">🚀</span>
             <h3 className="text-xl font-bold">
-              {t('قريبا جدا!', 'Bientôt disponible!')}
+              {t('ابدأ دابا!', 'Commencez maintenant!')}
             </h3>
           </div>
           <p className="text-muted-foreground mb-4">
             {t(
-              'كن من الأوائل لي غادي يجربو سمارت كارني - سجل دابا!',
-              'Soyez parmi les premiers à essayer Smart Karni - inscrivez-vous!'
+              'سجل مجانا و بدأ تسيّر ديون الزبائن ديالك بكل سهولة',
+              'Inscrivez-vous gratuitement et gérez les dettes de vos clients facilement'
             )}
           </p>
-          <div className="inline-flex items-center gap-2 bg-background px-4 py-2 rounded-full">
-            <Users className="w-5 h-5 text-primary" />
-            <span className="font-bold text-primary">
-              {t('🔥 سجل فقائمة الانتظار', '🔥 Rejoignez la liste d\'attente')}
-            </span>
-          </div>
+          <Link to="/register" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold hover:bg-primary/90 transition-colors">
+            <Users className="w-5 h-5" />
+            {t('سجل مجانا', 'S\'inscrire gratuitement')}
+          </Link>
         </div>
       </div>
     </section>

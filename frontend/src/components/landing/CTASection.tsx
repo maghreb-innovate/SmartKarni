@@ -28,8 +28,8 @@ const CTASection = () => {
         </h2>
         <p className="text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
           {t(
-            'سجل مجانا و بدأ تسجل ديون الزبائن ديالك. بلا بطاقة بنكية!',
-            'Inscrivez-vous gratuitement et commencez à gérer les dettes de vos clients. Sans carte bancaire!'
+            'سجل مجانا و بدأ تسجل ديون الزبائن ديالك.',
+            'Inscrivez-vous gratuitement et commencez à gérer les dettes de vos clients.'
           )}
         </p>
 
@@ -52,7 +52,7 @@ const CTASection = () => {
               <div className="font-semibold">Web App ✓</div>
             </div>
           </Link>
-          <div className="bg-primary-foreground/10 rounded-xl px-6 py-3 flex items-center gap-3">
+          <div className="bg-primary-foreground/10 rounded-xl px-6 py-3 flex items-center gap-3 cursor-not-allowed opacity-60" title={isArabic ? 'قريبا' : 'Bientôt'}>
             <span className="text-2xl">▶️</span>
             <div className="text-start">
               <div className="text-xs text-primary-foreground/60">
@@ -61,7 +61,7 @@ const CTASection = () => {
               <div className="font-semibold">Google Play</div>
             </div>
           </div>
-          <div className="bg-primary-foreground/10 rounded-xl px-6 py-3 flex items-center gap-3">
+          <div className="bg-primary-foreground/10 rounded-xl px-6 py-3 flex items-center gap-3 cursor-not-allowed opacity-60" title={isArabic ? 'قريبا' : 'Bientôt'}>
             <span className="text-2xl">🍎</span>
             <div className="text-start">
               <div className="text-xs text-primary-foreground/60">

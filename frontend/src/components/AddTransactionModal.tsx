@@ -11,8 +11,6 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Plus, Trash2, Loader2, Package, Calculator } from 'lucide-react';
 import { formatCurrency } from '@/lib/constants';
-import { useAuth } from '@/contexts/AuthContext';
-import { FREE_PLAN_LIMITS } from '@/lib/constants';
 
 interface TransactionItem {
   id: string;
@@ -25,13 +23,11 @@ interface AddTransactionModalProps {
   onOpenChange: (open: boolean) => void;
   clientId: string;
   clientName: string;
-  currentItemCount: number;
   onSubmit: (data: {
     clientId: string;
     items: { item_name: string; price: number }[];
     notes?: string;
   }) => Promise<void>;
-  onUpgradeNeeded: () => void;
 }
 
 export const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
@@ -39,26 +35,15 @@ export const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
   onOpenChange,
   clientId,
   clientName,
-  currentItemCount,
   onSubmit,
-  onUpgradeNeeded,
 }) => {
-  const { profile } = useAuth();
   const [items, setItems] = useState<TransactionItem[]>([
     { id: '1', item_name: '', price: '' },
   ]);
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const isPremium = profile?.is_premium ?? false;
-  const maxItems = isPremium ? Infinity : FREE_PLAN_LIMITS.MAX_ITEMS_PER_CLIENT;
-  const remainingItems = maxItems - currentItemCount;
-
   const addItem = () => {
-    if (!isPremium && items.length >= remainingItems) {
-      onUpgradeNeeded();
-      return;
-    }
     setItems([
       ...items,
       { id: Date.now().toString(), item_name: '', price: '' },
@@ -93,12 +78,6 @@ export const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
 
     if (validItems.length === 0) return;
 
-    // Check item limit
-    if (!isPremium && currentItemCount + validItems.length > FREE_PLAN_LIMITS.MAX_ITEMS_PER_CLIENT) {
-      onUpgradeNeeded();
-      return;
-    }
-
     setLoading(true);
     try {
       await onSubmit({
@@ -128,14 +107,6 @@ export const AddTransactionModal: React.FC<AddTransactionModalProps> = ({
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          {!isPremium && (
-            <div className="bg-warning/10 border border-warning/20 rounded-lg p-3 text-sm">
-              <p className="text-warning-foreground">
-                يمكنك إضافة {remainingItems} منتج إضافي (الخطة المجانية: {FREE_PLAN_LIMITS.MAX_ITEMS_PER_CLIENT} منتج)
-              </p>
-            </div>
-          )}
-
           <div className="space-y-3">
             <Label>المنتجات</Label>
             {items.map((item, index) => (

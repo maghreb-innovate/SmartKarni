@@ -7,7 +7,7 @@ const Footer = () => {
   const footerLinks = [
     { path: '/', label: { ar: 'الرئيسية', fr: 'Accueil' } },
     { path: '/features', label: { ar: 'المميزات', fr: 'Fonctionnalités' } },
-    { path: '/pricing', label: { ar: 'الأثمنة', fr: 'Tarifs' } },
+
     { path: '/contact', label: { ar: 'تواصل معانا', fr: 'Contact' } },
     { path: '/privacy', label: { ar: 'سياسة الخصوصية', fr: 'Confidentialité' } },
   ];
