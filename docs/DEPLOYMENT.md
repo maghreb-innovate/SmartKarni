@@ -59,7 +59,7 @@ Automatic via GitHub Pages (Let's Encrypt).
 ## Manual Deploy (if needed)
 
 ```bash
-cd /opt/karni/frontend
+cd /opt/smartkarni.com/frontend
 npm run build
 # Then push to main - GitHub Actions handles the rest
 ```
