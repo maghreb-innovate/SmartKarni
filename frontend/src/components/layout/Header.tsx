@@ -116,7 +116,7 @@ const Header = () => {
               onClick={toggleLanguage}
               className="px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground text-sm font-medium hover:bg-muted"
             >
-              {isArabic ? 'FR' : 'AR'}
+              {isArabic ? '🇫🇷' : '🇲🇦'}
             </button>
 
             {/* PWA Install – Desktop */}
