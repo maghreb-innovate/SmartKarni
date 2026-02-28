@@ -106,12 +106,12 @@ test.describe('SEO', () => {
     });
 
     test('favicon.ico returns HTTP 200', async ({ request }) => {
-      const response = await request.get('https://smartkarni.com/favicon.ico');
+      const response = await request.get('/favicon.ico');
       expect(response.status()).toBe(200);
     });
 
     test('og-image.png returns HTTP 200', async ({ request }) => {
-      const response = await request.get('https://smartkarni.com/og-image.png');
+      const response = await request.get('/og-image.png');
       expect(response.status()).toBe(200);
     });
   });

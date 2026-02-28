@@ -12,7 +12,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'https://smartkarni.com',
+    baseURL: process.env.BASE_URL || 'https://smartkarni.com',
     trace: 'on-first-retry',
   },
   projects: [

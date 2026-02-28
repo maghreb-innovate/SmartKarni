@@ -15,13 +15,12 @@ test.describe('Navigation', () => {
     test('shows nav links on desktop', async ({ page }) => {
       await expect(page.locator('header nav >> text=الرئيسية')).toBeVisible();
       await expect(page.locator('header nav >> text=المميزات')).toBeVisible();
-      await expect(page.locator('header nav >> text=الأثمنة')).toBeVisible();
       await expect(page.locator('header nav >> text=معاينة')).toBeVisible();
       await expect(page.locator('header nav >> text=تواصل')).toBeVisible();
     });
 
     test('shows language toggle', async ({ page }) => {
-      await expect(page.locator('header button', { hasText: 'FR' })).toBeVisible();
+      await expect(page.locator('header button', { hasText: '🇫🇷' })).toBeVisible();
     });
 
     test('shows login button on desktop', async ({ page }) => {
@@ -42,11 +41,6 @@ test.describe('Navigation', () => {
       await page.locator('header nav >> text=المميزات').click();
       await expect(page).toHaveURL(/\/features$/);
     });
-
-    test('pricing link navigates to /pricing', async ({ page }) => {
-      await page.locator('header nav >> text=الأثمنة').click();
-      await expect(page).toHaveURL(/\/pricing$/);
-    });
   });
 
   // ── Mobile Menu ──────────────────────────────────────────
@@ -62,12 +56,24 @@ test.describe('Navigation', () => {
       await expect(menuBtn).toBeVisible();
     });
 
+    test('hamburger has aria-label', async ({ page }) => {
+      const menuBtn = page.locator('header button[aria-label="Open menu"]');
+      await expect(menuBtn).toBeVisible();
+    });
+
     test('opens menu and shows nav items', async ({ page }) => {
       const menuBtn = page.locator('header button').filter({ has: page.locator('svg') }).last();
       await menuBtn.click();
       // Mobile nav appears within header
       await expect(page.locator('header').getByRole('link', { name: 'الرئيسية' })).toBeVisible();
       await expect(page.locator('header').getByRole('link', { name: 'المميزات' })).toBeVisible();
+    });
+
+    test('shows overlay when menu is open', async ({ page }) => {
+      const menuBtn = page.locator('header button[aria-label="Open menu"]');
+      await menuBtn.click();
+      const overlay = page.locator('div.fixed.bg-black\\/50');
+      await expect(overlay).toBeVisible();
     });
 
     test('navigates via mobile menu', async ({ page }) => {
@@ -92,7 +98,6 @@ test.describe('Navigation', () => {
     test('shows navigation links', async ({ page }) => {
       await expect(page.locator('footer nav >> text=الرئيسية')).toBeVisible();
       await expect(page.locator('footer nav >> text=المميزات')).toBeVisible();
-      await expect(page.locator('footer nav >> text=الأثمنة')).toBeVisible();
       await expect(page.locator('footer nav >> text=تواصل معانا')).toBeVisible();
       await expect(page.locator('footer nav >> text=سياسة الخصوصية')).toBeVisible();
     });
@@ -119,11 +124,6 @@ test.describe('Navigation', () => {
       await expect(page.locator('h1')).toContainText('المميزات');
     });
 
-    test('/pricing renders correctly', async ({ page }) => {
-      await page.goto('/pricing');
-      await expect(page.locator('h1')).toContainText('الأثمنة');
-    });
-
     test('/contact renders correctly', async ({ page }) => {
       await page.goto('/contact');
       await expect(page.locator('h1')).toContainText('تواصل معانا');
@@ -147,16 +147,16 @@ test.describe('Navigation', () => {
       await expect(page.locator('h1')).toContainText('404');
     });
 
-    test('shows "Page not found" text', async ({ page }) => {
+    test('shows "هاد الصفحة ما كايناش" text', async ({ page }) => {
       await page.goto('/this-page-does-not-exist');
-      await expect(page.locator('text=Page not found')).toBeVisible();
+      await expect(page.locator('text=هاد الصفحة ما كايناش')).toBeVisible();
     });
 
     test('has link back to home', async ({ page }) => {
       await page.goto('/this-page-does-not-exist');
-      const link = page.locator('a[href="/"]');
+      const link = page.locator('a', { hasText: 'رجع للرئيسية' });
       await expect(link).toBeVisible();
-      await expect(link).toContainText('Return to Home');
+      await expect(link).toHaveAttribute('href', '/');
     });
   });
 
@@ -170,6 +170,11 @@ test.describe('Navigation', () => {
     test('/app redirects to /login', async ({ page }) => {
       await page.goto('/app');
       await expect(page).toHaveURL(/\/login$/);
+    });
+
+    test('/pricing redirects to /', async ({ page }) => {
+      await page.goto('/pricing');
+      await expect(page).toHaveURL(/\/$/);
     });
   });
 });

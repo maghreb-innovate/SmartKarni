@@ -60,6 +60,16 @@ test.describe('Auth Pages', () => {
     test('shows subtitle text', async ({ page }) => {
       await expect(page.locator('text=أدخل بياناتك للوصول إلى حسابك')).toBeVisible();
     });
+
+    test('has back to home link', async ({ page }) => {
+      const link = page.locator('a[href="/"]', { hasText: 'الرجوع للرئيسية' });
+      await expect(link).toBeVisible();
+    });
+
+    test('has forgot password button', async ({ page }) => {
+      const btn = page.locator('button', { hasText: 'نسيتي كلمة المرور؟' });
+      await expect(btn).toBeVisible();
+    });
   });
 
   // ── Register Page ────────────────────────────────────────
@@ -119,6 +129,11 @@ test.describe('Auth Pages', () => {
 
     test('password has minLength of 6', async ({ page }) => {
       await expect(page.locator('#password')).toHaveAttribute('minlength', '6');
+    });
+
+    test('has back to home link', async ({ page }) => {
+      const link = page.locator('a[href="/"]', { hasText: 'الرجوع للرئيسية' });
+      await expect(link).toBeVisible();
     });
   });
 });

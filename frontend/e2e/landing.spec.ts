@@ -22,15 +22,14 @@ test.describe('Landing Page', () => {
 
     test('shows CTA buttons to register and preview', async ({ page }) => {
       await expect(page.locator('a[href="/register"]').first()).toBeVisible();
-      await expect(page.locator('a[href="/preview"]')).toBeVisible();
+      await expect(page.locator('a[href="/preview"]').first()).toBeVisible();
     });
 
     test('shows 4 benefit cards', async ({ page }) => {
-      // Benefits are in rounded-xl bg-secondary/50 cards inside the hero
       await expect(page.locator('text=ما عمرك تخسر فلوسك').first()).toBeVisible();
       await expect(page.locator('text=دعم 24/7 بالدارجة').first()).toBeVisible();
       await expect(page.locator('text=قفل بالبصمة').first()).toBeVisible();
-      await expect(page.locator('text=صدقة - ساعد الآخرين').first()).toBeVisible();
+      await expect(page.locator('text=100% مجاني').first()).toBeVisible();
     });
   });
 
@@ -60,17 +59,6 @@ test.describe('Landing Page', () => {
     });
   });
 
-  // ── SadaqaSection ────────────────────────────────────────
-  test.describe('SadaqaSection', () => {
-    test('shows the heading', async ({ page }) => {
-      await expect(page.locator('h2', { hasText: 'صدقة - ساعد الآخرين' })).toBeVisible();
-    });
-
-    test('shows the hadith quote', async ({ page }) => {
-      await expect(page.locator('blockquote')).toContainText('من نفّس عن مؤمن كربة');
-    });
-  });
-
   // ── TrustSection ─────────────────────────────────────────
   test.describe('TrustSection', () => {
     test('shows the heading', async ({ page }) => {
@@ -81,6 +69,12 @@ test.describe('Landing Page', () => {
       const section = page.locator('section', { has: page.locator('text=علاش سمارت كارني مختلف؟') });
       const badges = section.locator('.trust-badge');
       await expect(badges).toHaveCount(4);
+    });
+
+    test('has register link', async ({ page }) => {
+      const section = page.locator('section', { has: page.locator('text=علاش سمارت كارني مختلف؟') });
+      const registerLink = section.locator('a[href="/register"]');
+      await expect(registerLink).toBeVisible();
     });
   });
 
@@ -97,23 +91,6 @@ test.describe('Landing Page', () => {
     });
   });
 
-  // ── PricingSection ───────────────────────────────────────
-  test.describe('PricingSection', () => {
-    test('shows the heading', async ({ page }) => {
-      await expect(page.locator('#pricing h2')).toContainText('الثمن');
-    });
-
-    test('shows free plan with 0 DH', async ({ page }) => {
-      const section = page.locator('#pricing');
-      await expect(section.getByText('0 درهم', { exact: true })).toBeVisible();
-    });
-
-    test('shows premium plan with 40 DH', async ({ page }) => {
-      const section = page.locator('#pricing');
-      await expect(section.locator('.text-accent', { hasText: '40 درهم' })).toBeVisible();
-    });
-  });
-
   // ── FAQSection ───────────────────────────────────────────
   test.describe('FAQSection', () => {
     test('shows the heading', async ({ page }) => {
@@ -123,6 +100,10 @@ test.describe('Landing Page', () => {
     test('shows FAQ questions', async ({ page }) => {
       await expect(page.locator('text=واش خاصني انترنت')).toBeVisible();
       await expect(page.locator('text=واش المعلومات ديالي محمية')).toBeVisible();
+    });
+
+    test('has unlimited clients FAQ question', async ({ page }) => {
+      await expect(page.locator('text=شحال من زبون نقدر نزيد؟')).toBeVisible();
     });
   });
 
@@ -142,6 +123,14 @@ test.describe('Landing Page', () => {
       await expect(section.locator('text=Google Play')).toBeVisible();
       await expect(section.locator('text=App Store')).toBeVisible();
     });
+
+    test('app store badges have cursor-not-allowed and opacity-60', async ({ page }) => {
+      const section = page.locator('#download');
+      const googlePlay = section.locator('div.cursor-not-allowed.opacity-60', { hasText: 'Google Play' });
+      const appStore = section.locator('div.cursor-not-allowed.opacity-60', { hasText: 'App Store' });
+      await expect(googlePlay).toBeVisible();
+      await expect(appStore).toBeVisible();
+    });
   });
 
   // ── Language Toggle ──────────────────────────────────────
@@ -151,7 +140,7 @@ test.describe('Landing Page', () => {
       await expect(page.locator('h1').first()).toContainText('سمارت كارني');
 
       // Toggle to French
-      const langBtn = page.locator('button', { hasText: 'FR' });
+      const langBtn = page.locator('button', { hasText: '🇫🇷' });
       await expect(langBtn).toBeVisible();
       await langBtn.click();
 
@@ -160,7 +149,7 @@ test.describe('Landing Page', () => {
       await expect(page.locator('text=Les problèmes qu')).toBeVisible();
 
       // Toggle back to Arabic
-      const langBtnAr = page.locator('button', { hasText: 'ع' });
+      const langBtnAr = page.locator('button', { hasText: '🇲🇦' });
       await langBtnAr.click();
       await expect(page.locator('h1').first()).toContainText('سمارت كارني');
     });
