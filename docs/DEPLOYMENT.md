@@ -43,7 +43,7 @@ A     @    185.199.108.153
 A     @    185.199.109.153
 A     @    185.199.110.153
 A     @    185.199.111.153
-CNAME www  redaekengren.github.io
+CNAME www  maghreb-innovate.github.io
 ```
 
 ### GitHub Settings

@@ -4,7 +4,7 @@
 
 ```bash
 # Clone
-git clone https://github.com/RedaEkengren/SmartKarni.git
+git clone https://github.com/maghreb-innovate/SmartKarni.git
 cd SmartKarni
 
 # Install

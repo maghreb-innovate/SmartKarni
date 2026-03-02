@@ -5,7 +5,7 @@
 **Live:** https://smartkarni.com
 
 [![License: Source Available](https://img.shields.io/badge/License-Source%20Available-blue.svg)](LICENSE)
-[![GitHub](https://img.shields.io/github/stars/RedaEkengren/SmartKarni?style=social)](https://github.com/RedaEkengren/SmartKarni)
+[![GitHub](https://img.shields.io/github/stars/maghreb-innovate/SmartKarni?style=social)](https://github.com/maghreb-innovate/SmartKarni)
 
 ---
 
@@ -108,7 +108,7 @@ Built by developers who understand the Moroccan market.
 
 ```bash
 # Clone
-git clone https://github.com/RedaEkengren/SmartKarni.git
+git clone https://github.com/maghreb-innovate/SmartKarni.git
 cd SmartKarni/frontend
 
 # Install
